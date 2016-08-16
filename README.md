@@ -1,1 +1,1 @@
-# scout-android-turbolinks
+# scout-android
