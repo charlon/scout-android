@@ -118,9 +118,8 @@ public class ActivityTech extends AppCompatActivity implements TurbolinksAdapter
     public void visitCompleted() {
 
         // set appbar title after the turbolinks visit
-        String pageTitle = TurbolinksSession.getDefault(this).getWebView().getTitle();
-        setTitle(pageTitle);
-
+        setTitle(TurbolinksSession.getDefault(this).getWebView().getTitle());
+        
     }
 
     // The starting point for any href clicked inside a Turbolinks enabled site. In a simple case

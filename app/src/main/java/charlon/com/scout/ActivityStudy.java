@@ -117,8 +117,7 @@ public class ActivityStudy extends AppCompatActivity implements TurbolinksAdapte
     public void visitCompleted() {
 
         // set appbar title after the turbolinks visit
-        String pageTitle = TurbolinksSession.getDefault(this).getWebView().getTitle();
-        setTitle(pageTitle);
+        setTitle(TurbolinksSession.getDefault(this).getWebView().getTitle());
 
     }
 
