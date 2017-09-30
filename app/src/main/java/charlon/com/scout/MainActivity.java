@@ -1,45 +1,42 @@
-package tabian.com.actionbar;
+package charlon.com.scout;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
-import tabian.com.actionbar.Utils.BottomNavigationViewHelper;
+import charlon.com.scout.Utils.BottomNavigationViewHelper;
 
 import com.basecamp.turbolinks.TurbolinksSession;
 import com.basecamp.turbolinks.TurbolinksAdapter;
 import com.basecamp.turbolinks.TurbolinksView;
 
-public class ActivityFood extends AppCompatActivity implements TurbolinksAdapter {
+public class MainActivity extends AppCompatActivity implements TurbolinksAdapter {
 
-    private static final String TAG = "ActivityFood";
-    private static final int ACTIVITY_NUM = 1;
-    private Context mContext = ActivityFood.this;
+    private static final String TAG = "MainActivity";
+    private static final int ACTIVITY_NUM = 0;
+    private Context mContext = MainActivity.this;
 
     // basic turbolinks setup
-    private static final String BASE_URL = "https://scout-test.s.uw.edu/h/seattle/food/";
+    private static final String BASE_URL = "https://scout-test.s.uw.edu/h/seattle/";
     private static final String INTENT_URL = "intentUrl";
 
     private String location;
-    private TurbolinksView turbolinksFoodView;
+    private TurbolinksView turbolinksMainView;
+
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_food);
+    protected void onCreate(Bundle savedInstanceState) {
 
-        setTitle("Food");
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
         // Find the custom TurbolinksView object in your layout
-        turbolinksFoodView = (TurbolinksView) findViewById(R.id.turbolinks_food_view);
+        turbolinksMainView = (TurbolinksView) findViewById(R.id.turbolinks_main_view);
 
         // For this demo app, we force debug logging on. You will only want to do
         // this for debug builds of your app (it is off by default)
@@ -52,7 +49,7 @@ public class ActivityFood extends AppCompatActivity implements TurbolinksAdapter
         TurbolinksSession.getDefault(this)
                 .activity(this)
                 .adapter(this)
-                .view(turbolinksFoodView)
+                .view(turbolinksMainView)
                 .visit(location);
 
         setupBottomNavigationView();
@@ -74,6 +71,7 @@ public class ActivityFood extends AppCompatActivity implements TurbolinksAdapter
         BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottomNavViewBar);
         BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationViewEx);
         BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationViewEx);
+
         Menu menu = bottomNavigationViewEx.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);
@@ -89,7 +87,7 @@ public class ActivityFood extends AppCompatActivity implements TurbolinksAdapter
                 .activity(this)
                 .adapter(this)
                 .restoreWithCachedSnapshot(true)
-                .view(turbolinksFoodView)
+                .view(turbolinksMainView)
                 .visit(location);
     }
 
@@ -131,9 +129,8 @@ public class ActivityFood extends AppCompatActivity implements TurbolinksAdapter
     // routing logic to take you to the right place within your app.
     @Override
     public void visitProposedToLocationWithAction(String location, String action) {
-        Intent intent = new Intent(this, ActivityFood.class);
+        Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra(INTENT_URL, location);
-
         this.startActivity(intent);
     }
 
@@ -149,8 +146,9 @@ public class ActivityFood extends AppCompatActivity implements TurbolinksAdapter
                     .activity(this)
                     .adapter(this)
                     .restoreWithCachedSnapshot(false)
-                    .view(turbolinksFoodView)
+                    .view(turbolinksMainView)
                     .visit(BASE_URL + "/error");
         }
     }
+
 }

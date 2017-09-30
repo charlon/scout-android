@@ -1,43 +1,42 @@
-package tabian.com.actionbar;
+package charlon.com.scout;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
-import tabian.com.actionbar.Utils.BottomNavigationViewHelper;
+import charlon.com.scout.Utils.BottomNavigationViewHelper;
 
 import com.basecamp.turbolinks.TurbolinksSession;
 import com.basecamp.turbolinks.TurbolinksAdapter;
 import com.basecamp.turbolinks.TurbolinksView;
 
-public class ActivityStudy extends AppCompatActivity implements TurbolinksAdapter {
+public class ActivityTech extends AppCompatActivity implements TurbolinksAdapter {
 
-    private static final String TAG = "ActivitySTudy";
-    private static final int ACTIVITY_NUM = 2;
-    private Context mContext = ActivityStudy.this;
+    private static final String TAG = "ActivityTech";
+    private static final int ACTIVITY_NUM = 3;
+    private Context mContext = ActivityTech.this;
 
     // basic turbolinks setup
-    private static final String BASE_URL = "https://scout-test.s.uw.edu/h/seattle/study/";
+    private static final String BASE_URL = "https://scout-test.s.uw.edu/h/seattle/tech/";
     private static final String INTENT_URL = "intentUrl";
 
     private String location;
-    private TurbolinksView turbolinksStudyView;
+    private TurbolinksView turbolinksTechView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_study);
+        setContentView(R.layout.activity_tech);
+
 
         // Find the custom TurbolinksView object in your layout
-        turbolinksStudyView = (TurbolinksView) findViewById(R.id.turbolinks_study_view);
+        turbolinksTechView = (TurbolinksView) findViewById(R.id.turbolinks_tech_view);
 
         // For this demo app, we force debug logging on. You will only want to do
         // this for debug builds of your app (it is off by default)
@@ -50,7 +49,7 @@ public class ActivityStudy extends AppCompatActivity implements TurbolinksAdapte
         TurbolinksSession.getDefault(this)
                 .activity(this)
                 .adapter(this)
-                .view(turbolinksStudyView)
+                .view(turbolinksTechView)
                 .visit(location);
 
         setupBottomNavigationView();
@@ -87,7 +86,7 @@ public class ActivityStudy extends AppCompatActivity implements TurbolinksAdapte
                 .activity(this)
                 .adapter(this)
                 .restoreWithCachedSnapshot(true)
-                .view(turbolinksStudyView)
+                .view(turbolinksTechView)
                 .visit(location);
     }
 
@@ -129,7 +128,7 @@ public class ActivityStudy extends AppCompatActivity implements TurbolinksAdapte
     // routing logic to take you to the right place within your app.
     @Override
     public void visitProposedToLocationWithAction(String location, String action) {
-        Intent intent = new Intent(this, ActivityStudy.class);
+        Intent intent = new Intent(this, ActivityTech.class);
         intent.putExtra(INTENT_URL, location);
 
         this.startActivity(intent);
@@ -147,9 +146,8 @@ public class ActivityStudy extends AppCompatActivity implements TurbolinksAdapte
                     .activity(this)
                     .adapter(this)
                     .restoreWithCachedSnapshot(false)
-                    .view(turbolinksStudyView)
+                    .view(turbolinksTechView)
                     .visit(BASE_URL + "/error");
         }
     }
-
 }

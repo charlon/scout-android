@@ -1,4 +1,4 @@
-package tabian.com.actionbar.Utils;
+package charlon.com.scout.Utils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,11 +9,11 @@ import android.view.MenuItem;
 
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
-import tabian.com.actionbar.R;
-import tabian.com.actionbar.ActivityFood;
-import tabian.com.actionbar.ActivityStudy;
-import tabian.com.actionbar.ActivityTech;
-import tabian.com.actionbar.MainActivity;
+import charlon.com.scout.R;
+import charlon.com.scout.ActivityFood;
+import charlon.com.scout.ActivityStudy;
+import charlon.com.scout.ActivityTech;
+import charlon.com.scout.MainActivity;
 
 
 public class BottomNavigationViewHelper {

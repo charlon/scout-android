@@ -1,4 +1,4 @@
-package tabian.com.actionbar;
+package charlon.com.scout;
 
 import org.junit.Test;
 

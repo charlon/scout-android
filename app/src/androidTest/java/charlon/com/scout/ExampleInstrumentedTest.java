@@ -1,4 +1,4 @@
-package tabian.com.actionbar;
+package charlon.com.scout;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

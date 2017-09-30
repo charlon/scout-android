@@ -1,46 +1,41 @@
-package tabian.com.actionbar;
+package charlon.com.scout;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
-import tabian.com.actionbar.Utils.BottomNavigationViewHelper;
+import charlon.com.scout.Utils.BottomNavigationViewHelper;
 
 import com.basecamp.turbolinks.TurbolinksSession;
 import com.basecamp.turbolinks.TurbolinksAdapter;
 import com.basecamp.turbolinks.TurbolinksView;
 
-public class MainActivity extends AppCompatActivity implements TurbolinksAdapter {
+public class ActivityStudy extends AppCompatActivity implements TurbolinksAdapter {
 
-    private static final String TAG = "MainActivity";
-    private static final int ACTIVITY_NUM = 0;
-    private Context mContext = MainActivity.this;
+    private static final String TAG = "ActivitySTudy";
+    private static final int ACTIVITY_NUM = 2;
+    private Context mContext = ActivityStudy.this;
 
     // basic turbolinks setup
-    private static final String BASE_URL = "https://scout-test.s.uw.edu/h/seattle/";
+    private static final String BASE_URL = "https://scout-test.s.uw.edu/h/seattle/study/";
     private static final String INTENT_URL = "intentUrl";
 
     private String location;
-    private TurbolinksView turbolinksMainView;
-
+    private TurbolinksView turbolinksStudyView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_study);
 
         // Find the custom TurbolinksView object in your layout
-        turbolinksMainView = (TurbolinksView) findViewById(R.id.turbolinks_main_view);
+        turbolinksStudyView = (TurbolinksView) findViewById(R.id.turbolinks_study_view);
 
         // For this demo app, we force debug logging on. You will only want to do
         // this for debug builds of your app (it is off by default)
@@ -53,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements TurbolinksAdapter
         TurbolinksSession.getDefault(this)
                 .activity(this)
                 .adapter(this)
-                .view(turbolinksMainView)
+                .view(turbolinksStudyView)
                 .visit(location);
 
         setupBottomNavigationView();
@@ -75,7 +70,6 @@ public class MainActivity extends AppCompatActivity implements TurbolinksAdapter
         BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottomNavViewBar);
         BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationViewEx);
         BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationViewEx);
-
         Menu menu = bottomNavigationViewEx.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);
@@ -91,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements TurbolinksAdapter
                 .activity(this)
                 .adapter(this)
                 .restoreWithCachedSnapshot(true)
-                .view(turbolinksMainView)
+                .view(turbolinksStudyView)
                 .visit(location);
     }
 
@@ -133,8 +127,9 @@ public class MainActivity extends AppCompatActivity implements TurbolinksAdapter
     // routing logic to take you to the right place within your app.
     @Override
     public void visitProposedToLocationWithAction(String location, String action) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, ActivityStudy.class);
         intent.putExtra(INTENT_URL, location);
+
         this.startActivity(intent);
     }
 
@@ -150,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements TurbolinksAdapter
                     .activity(this)
                     .adapter(this)
                     .restoreWithCachedSnapshot(false)
-                    .view(turbolinksMainView)
+                    .view(turbolinksStudyView)
                     .visit(BASE_URL + "/error");
         }
     }
