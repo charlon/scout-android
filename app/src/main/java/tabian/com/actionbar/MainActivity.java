@@ -60,6 +60,13 @@ public class MainActivity extends AppCompatActivity implements TurbolinksAdapter
 
     }
 
+    // Remove inter-activity transition to avoid screen tossing on tapping bottom navigation items
+    @Override
+    public void onPause() {
+        super.onPause();
+        overridePendingTransition(0, 0);
+    }
+
     /**
      * BottomNavigationView setup
      */
@@ -114,6 +121,10 @@ public class MainActivity extends AppCompatActivity implements TurbolinksAdapter
 
     @Override
     public void visitCompleted() {
+
+        // set appbar title after the turbolinks visit
+        String pageTitle = TurbolinksSession.getDefault(this).getWebView().getTitle();
+        setTitle(pageTitle);
 
     }
 

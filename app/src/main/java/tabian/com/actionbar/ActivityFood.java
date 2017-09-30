@@ -36,6 +36,8 @@ public class ActivityFood extends AppCompatActivity implements TurbolinksAdapter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food);
 
+        setTitle("Food");
+
         // Find the custom TurbolinksView object in your layout
         turbolinksFoodView = (TurbolinksView) findViewById(R.id.turbolinks_food_view);
 
@@ -57,6 +59,13 @@ public class ActivityFood extends AppCompatActivity implements TurbolinksAdapter
 
     }
 
+    // Remove inter-activity transition to avoid screen tossing on tapping bottom navigation items
+    @Override
+    public void onPause() {
+        super.onPause();
+        overridePendingTransition(0, 0);
+    }
+
     /**
      * BottomNavigationView setup
      */
@@ -69,7 +78,7 @@ public class ActivityFood extends AppCompatActivity implements TurbolinksAdapter
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);
     }
-     
+
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -110,6 +119,10 @@ public class ActivityFood extends AppCompatActivity implements TurbolinksAdapter
 
     @Override
     public void visitCompleted() {
+
+        // set appbar title after the turbolinks visit
+        String pageTitle = TurbolinksSession.getDefault(this).getWebView().getTitle();
+        setTitle(pageTitle);
 
     }
 
