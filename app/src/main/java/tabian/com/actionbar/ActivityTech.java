@@ -1,20 +1,28 @@
 package tabian.com.actionbar;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
+
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+import tabian.com.actionbar.Utils.BottomNavigationViewHelper;
 
 import com.basecamp.turbolinks.TurbolinksSession;
 import com.basecamp.turbolinks.TurbolinksAdapter;
 import com.basecamp.turbolinks.TurbolinksView;
 
 public class ActivityTech extends AppCompatActivity implements TurbolinksAdapter {
+
+    private static final String TAG = "ActivityTech";
+    private static final int ACTIVITY_NUM = 3;
+    private Context mContext = ActivityTech.this;
 
     // basic turbolinks setup
     private static final String BASE_URL = "https://scout-test.s.uw.edu/h/seattle/tech/";
@@ -46,42 +54,21 @@ public class ActivityTech extends AppCompatActivity implements TurbolinksAdapter
                 .view(turbolinksTechView)
                 .visit(location);
 
+        setupBottomNavigationView();
 
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
-        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
-        Menu menu = bottomNavigationView.getMenu();
-        MenuItem menuItem = menu.getItem(3);
+    }
+
+    /**
+     * BottomNavigationView setup
+     */
+    private void setupBottomNavigationView(){
+        Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView");
+        BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottomNavViewBar);
+        BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationViewEx);
+        BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationViewEx);
+        Menu menu = bottomNavigationViewEx.getMenu();
+        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);
-
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.ic_arrow:
-                        Intent intent0 = new Intent(ActivityTech.this, MainActivity.class);
-                        startActivity(intent0);
-                        break;
-
-                    case R.id.ic_android:
-                        Intent intent1 = new Intent(ActivityTech.this, ActivityFood.class);
-                        startActivity(intent1);
-                        break;
-
-                    case R.id.ic_books:
-                        Intent intent2 = new Intent(ActivityTech.this, ActivityStudy.class);
-                        startActivity(intent2);
-                        break;
-
-                    case R.id.ic_center_focus:
-
-                        break;
-
-                }
-
-
-                return false;
-            }
-        });
     }
 
     @Override

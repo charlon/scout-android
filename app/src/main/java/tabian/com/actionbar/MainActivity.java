@@ -1,21 +1,29 @@
 package tabian.com.actionbar;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
+
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+import tabian.com.actionbar.Utils.BottomNavigationViewHelper;
 
 import com.basecamp.turbolinks.TurbolinksSession;
 import com.basecamp.turbolinks.TurbolinksAdapter;
 import com.basecamp.turbolinks.TurbolinksView;
 
 public class MainActivity extends AppCompatActivity implements TurbolinksAdapter {
-    private static final String TAG = "MainActivity";
 
+    private static final String TAG = "MainActivity";
+    private static final int ACTIVITY_NUM = 0;
+    private Context mContext = MainActivity.this;
 
     // basic turbolinks setup
     private static final String BASE_URL = "https://scout-test.s.uw.edu/h/seattle/";
@@ -48,43 +56,22 @@ public class MainActivity extends AppCompatActivity implements TurbolinksAdapter
                 .view(turbolinksMainView)
                 .visit(location);
 
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
-        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
-        Menu menu = bottomNavigationView.getMenu();
-        MenuItem menuItem = menu.getItem(0);
+        setupBottomNavigationView();
+
+    }
+
+    /**
+     * BottomNavigationView setup
+     */
+    private void setupBottomNavigationView(){
+        Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView");
+        BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottomNavViewBar);
+        BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationViewEx);
+        BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationViewEx);
+
+        Menu menu = bottomNavigationViewEx.getMenu();
+        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);
-
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-
-                    case R.id.ic_arrow:
-
-                        break;
-
-                    case R.id.ic_android:
-                        Intent intent1 = new Intent(MainActivity.this, ActivityFood.class);
-                        startActivity(intent1);
-                        break;
-
-                    case R.id.ic_books:
-                        Intent intent2 = new Intent(MainActivity.this, ActivityStudy.class);
-                        startActivity(intent2);
-                        break;
-
-                    case R.id.ic_center_focus:
-                        Intent intent3 = new Intent(MainActivity.this, ActivityTech.class);
-                        startActivity(intent3);
-                        break;
-
-                }
-
-
-                return false;
-            }
-        });
-
     }
 
     @Override
@@ -137,7 +124,6 @@ public class MainActivity extends AppCompatActivity implements TurbolinksAdapter
     public void visitProposedToLocationWithAction(String location, String action) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra(INTENT_URL, location);
-
         this.startActivity(intent);
     }
 
