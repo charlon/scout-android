@@ -36,21 +36,25 @@ public class BottomNavigationViewHelper {
 
                     case R.id.ic_arrow:
                         Intent intent1 = new Intent(context, MainActivity.class);//ACTIVITY_NUM = 0
+                        intent1.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         context.startActivity(intent1);
                         break;
 
                     case R.id.ic_android:
                         Intent intent2  = new Intent(context, ActivityFood.class);//ACTIVITY_NUM = 1
+                        intent2.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         context.startActivity(intent2);
                         break;
 
                     case R.id.ic_books:
                         Intent intent3 = new Intent(context, ActivityStudy.class);//ACTIVITY_NUM = 2
+                        intent3.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         context.startActivity(intent3);
                         break;
 
                     case R.id.ic_center_focus:
                         Intent intent4 = new Intent(context, ActivityTech.class);//ACTIVITY_NUM = 3
+                        intent4.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         context.startActivity(intent4);
                         break;
                 }

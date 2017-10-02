@@ -89,6 +89,14 @@ public class ActivityStudy extends AppCompatActivity implements TurbolinksAdapte
                 .visit(location);
     }
 
+    /**
+    @Override
+    public void onBackPressed() {
+        // TODO: back button is currently broken... need to take this activity's back in the stack
+        // if it's visiting a turbolinks visit
+    }
+    **/
+
     // -----------------------------------------------------------------------
     // TurbolinksAdapter interface
     // -----------------------------------------------------------------------
@@ -128,7 +136,6 @@ public class ActivityStudy extends AppCompatActivity implements TurbolinksAdapte
     public void visitProposedToLocationWithAction(String location, String action) {
         Intent intent = new Intent(this, ActivityStudy.class);
         intent.putExtra(INTENT_URL, location);
-
         this.startActivity(intent);
     }
 

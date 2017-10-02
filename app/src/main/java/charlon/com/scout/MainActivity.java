@@ -91,6 +91,15 @@ public class MainActivity extends AppCompatActivity implements TurbolinksAdapter
                 .visit(location);
     }
 
+    /**
+    @Override
+    public void onBackPressed() {
+        // TODO: back button is currently broken... need to take this activity's back in the stack
+        // if it's visiting a turbolinks visit
+    }
+    **/
+
+
     // -----------------------------------------------------------------------
     // TurbolinksAdapter interface
     // -----------------------------------------------------------------------

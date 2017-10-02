@@ -14,13 +14,12 @@
         <activity android:name="charlon.com.scout.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="charlon.com.scout.ActivityFood"></activity>
-        <activity android:name="charlon.com.scout.ActivityStudy"></activity>
-        <activity android:name="charlon.com.scout.ActivityTech"></activity>
+        <activity android:name="charlon.com.scout.ActivityFood"/>
+        <activity android:name="charlon.com.scout.ActivityStudy" />
+        <activity android:name="charlon.com.scout.ActivityTech" />
     </application>
 
 </manifest>
