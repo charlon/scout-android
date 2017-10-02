@@ -58,10 +58,11 @@ public class MainActivity extends AppCompatActivity implements TurbolinksAdapter
 
     // Remove inter-activity transition to avoid screen tossing on tapping bottom navigation items
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onStart() {
+        super.onStart();
         overridePendingTransition(0, 0);
     }
+
 
     /**
      * BottomNavigationView setup
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements TurbolinksAdapter
         Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView");
         BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottomNavViewBar);
         BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationViewEx);
-        BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationViewEx);
+        BottomNavigationViewHelper.enableNavigation(mContext, this, bottomNavigationViewEx);
 
         Menu menu = bottomNavigationViewEx.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
@@ -140,6 +141,7 @@ public class MainActivity extends AppCompatActivity implements TurbolinksAdapter
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra(INTENT_URL, location);
         this.startActivity(intent);
+        this.overridePendingTransition(0, 0);
     }
 
     // -----------------------------------------------------------------------
