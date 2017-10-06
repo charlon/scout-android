@@ -137,6 +137,7 @@ public class MainActivity extends AppCompatActivity implements TurbolinksAdapter
 
         // set appbar title after the turbolinks visit
         this.setTitle(TurbolinksSession.getDefault(this).getWebView().getTitle());
+        // enable back button
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
@@ -150,6 +151,7 @@ public class MainActivity extends AppCompatActivity implements TurbolinksAdapter
         intent.putExtra(INTENT_URL, location);
         this.startActivity(intent);
         this.overridePendingTransition(0, 0);
+
 
     }
 
