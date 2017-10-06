@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,13 +29,16 @@ public class ActivityFood extends AppCompatActivity implements TurbolinksAdapter
 
     private String location;
     private TurbolinksView turbolinksFoodView;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food);
 
-        setTitle("Food");
+        // setup actionbar
+        toolbar=(Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         // Find the custom TurbolinksView object in your layout
         turbolinksFoodView = (TurbolinksView) findViewById(R.id.turbolinks_food_view);
@@ -127,7 +131,8 @@ public class ActivityFood extends AppCompatActivity implements TurbolinksAdapter
     public void visitCompleted() {
 
         // set appbar title after the turbolinks visit
-        setTitle(TurbolinksSession.getDefault(this).getWebView().getTitle());
+        this.setTitle(TurbolinksSession.getDefault(this).getWebView().getTitle());
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 

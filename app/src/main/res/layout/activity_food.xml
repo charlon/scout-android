@@ -11,17 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:id="@+id/topBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp">
-
-            <android.support.design.widget.AppBarLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </RelativeLayout>
+        <!-- top toolbar (actionbar) -->
+        <include layout="@layout/layout_top_toolbar"/>
 
         <RelativeLayout
             android:layout_below="@+id/topBar"

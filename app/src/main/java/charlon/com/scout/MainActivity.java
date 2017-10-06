@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,13 +28,17 @@ public class MainActivity extends AppCompatActivity implements TurbolinksAdapter
 
     private String location;
     private TurbolinksView turbolinksMainView;
-
+    private  Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // setup actionbar
+        toolbar=(Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         // Find the custom TurbolinksView object in your layout
         turbolinksMainView = (TurbolinksView) findViewById(R.id.turbolinks_main_view);
@@ -52,9 +57,11 @@ public class MainActivity extends AppCompatActivity implements TurbolinksAdapter
                 .view(turbolinksMainView)
                 .visit(location);
 
+        // setup bottomnav tabs
         setupBottomNavigationView();
 
     }
+
 
     // Remove inter-activity transition to avoid screen tossing on tapping bottom navigation items
     @Override
@@ -129,7 +136,8 @@ public class MainActivity extends AppCompatActivity implements TurbolinksAdapter
     public void visitCompleted() {
 
         // set appbar title after the turbolinks visit
-        setTitle(TurbolinksSession.getDefault(this).getWebView().getTitle());
+        this.setTitle(TurbolinksSession.getDefault(this).getWebView().getTitle());
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 
@@ -142,6 +150,7 @@ public class MainActivity extends AppCompatActivity implements TurbolinksAdapter
         intent.putExtra(INTENT_URL, location);
         this.startActivity(intent);
         this.overridePendingTransition(0, 0);
+
     }
 
     // -----------------------------------------------------------------------
