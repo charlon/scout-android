@@ -20,12 +20,14 @@ public class MainActivity extends AppCompatActivity implements TurbolinksAdapter
 
     private static final String TAG = "MainActivity";
     private static final int ACTIVITY_NUM = 0;
+    private static final String SHOW_BACK = "SHOW_BACK";
     private Context mContext = MainActivity.this;
 
     // basic turbolinks setup
     private static final String BASE_URL = "https://scout-test.s.uw.edu/h/seattle/";
     private static final String INTENT_URL = "intentUrl";
 
+    private Boolean showback;
     private String location;
     private TurbolinksView turbolinksMainView;
     private  Toolbar toolbar;
@@ -137,9 +139,12 @@ public class MainActivity extends AppCompatActivity implements TurbolinksAdapter
 
         // set appbar title after the turbolinks visit
         this.setTitle(TurbolinksSession.getDefault(this).getWebView().getTitle());
-        // enable back button
-        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        // enable back button if turbolinks proposed a visit
+        showback = getIntent().getBooleanExtra(SHOW_BACK, false);
+        if (showback) {
+            this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     // The starting point for any href clicked inside a Turbolinks enabled site. In a simple case
@@ -149,6 +154,7 @@ public class MainActivity extends AppCompatActivity implements TurbolinksAdapter
     public void visitProposedToLocationWithAction(String location, String action) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra(INTENT_URL, location);
+        intent.putExtra(SHOW_BACK, true);
         this.startActivity(intent);
         this.overridePendingTransition(0, 0);
 
