@@ -64,6 +64,12 @@ public class MainActivity extends AppCompatActivity implements TurbolinksAdapter
 
     }
 
+    // actionbar back button support
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 
     // Remove inter-activity transition to avoid screen tossing on tapping bottom navigation items
     @Override
@@ -100,16 +106,7 @@ public class MainActivity extends AppCompatActivity implements TurbolinksAdapter
                 .view(turbolinksMainView)
                 .visit(location);
     }
-
-    /**
-    @Override
-    public void onBackPressed() {
-        // TODO: back button is currently broken... need to take this activity's back in the stack
-        // if it's visiting a turbolinks visit
-    }
-    **/
-
-
+    
     // -----------------------------------------------------------------------
     // TurbolinksAdapter interface
     // -----------------------------------------------------------------------
@@ -157,8 +154,6 @@ public class MainActivity extends AppCompatActivity implements TurbolinksAdapter
         intent.putExtra(SHOW_BACK, true);
         this.startActivity(intent);
         this.overridePendingTransition(0, 0);
-
-
     }
 
     // -----------------------------------------------------------------------
